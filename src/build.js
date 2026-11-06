@@ -5,6 +5,20 @@ import { colorTokensCss, inlineSvg } from './svg.js';
 
 const TEMPLATE = readFileSync(new URL('./template.html', import.meta.url), 'utf8');
 
+// Latin subsets from Google Fonts (SIL Open Font License, see src/fonts/OFL-*.txt),
+// embedded so the page renders the same offline and under strict CSPs.
+const FONTS = [
+  ['Familjen Grotesk', 'normal', '400 700', 'familjen-grotesk.woff2'],
+  ['Literata', 'normal', '300 700', 'literata.woff2'],
+  ['Literata', 'italic', '300 700', 'literata-italic.woff2'],
+  ['IBM Plex Mono', 'normal', '400', 'ibm-plex-mono-400.woff2'],
+  ['IBM Plex Mono', 'normal', '500', 'ibm-plex-mono-500.woff2'],
+];
+const FONT_CSS = FONTS.map(([family, style, weight, file]) => {
+  const data = readFileSync(new URL(`./fonts/${file}`, import.meta.url)).toString('base64');
+  return `@font-face { font-family: "${family}"; font-style: ${style}; font-weight: ${weight}; font-display: swap; src: url(data:font/woff2;base64,${data}) format("woff2"); }`;
+}).join('\n');
+
 const WRAP_LANGS = new Set(['markdown', 'md', 'yaml', 'yml']);
 const RASTER = {
   '.png': 'image/png',
@@ -274,10 +288,11 @@ export function build(source, opts = {}) {
     KEY: title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') || 'doc',
     NOUN: noun,
     COUNT: String(count),
+    FONTS: FONT_CSS,
     EXTRA_STYLE: colorTokensCss(colors),
     CONTENT: content,
   };
-  const page = TEMPLATE.replace(/<!--(TITLE|LANG|KEY|NOUN|COUNT|EXTRA_STYLE|CONTENT)-->/g, (m, k) => fill[k]);
+  const page = TEMPLATE.replace(/<!--(TITLE|LANG|KEY|NOUN|COUNT|FONTS|EXTRA_STYLE|CONTENT)-->/g, (m, k) => fill[k]);
   const html = fragment
     ? page
     : '<!doctype html>\n' +

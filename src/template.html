@@ -1,8 +1,6 @@
 <title><!--TITLE--></title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@400..700&family=IBM+Plex+Mono:wght@400;500&family=Literata:ital,opsz,wght@0,7..72,300..700;1,7..72,300..700&display=swap">
+<style><!--FONTS--></style>
 <style>
 /* Layout: a two-column book sheet on a cool desk. One page per screen, turned sideways, with a running head and folio like a printed manual. */
 :root {
@@ -173,6 +171,7 @@ button { font: inherit; color: inherit; }
 .viewport {
   flex: 1;
   min-width: 0;
+  margin-inline: auto;
   position: relative;
   overflow: hidden;
   overflow: clip;
@@ -475,7 +474,8 @@ td:first-child { font-family: var(--f-display); font-weight: 600; }
 .fig-t { font-weight: 600; }
 
 .diagram.inline { flex: none; margin: 1.2em 0 1.4em; gap: .6em; break-inside: avoid; }
-.diagram.inline > svg, .diagram.inline > img { flex: none; min-height: 0; height: auto; }
+.diagram.inline > svg, .diagram.inline > img { flex: none; min-height: 0; height: auto; max-height: calc(var(--page-h) - 3.5em); }
+.diagram.inline > img { object-fit: contain; }
 .diagram.inline figcaption { padding-top: .6em; font-size: .9em; }
 
 /* ---------- drawer ---------- */
@@ -712,14 +712,19 @@ td:first-child { font-family: var(--f-display); font-weight: 600; }
   });
 
   // ----- layout -----
+  // Two columns only while each holds about 42 characters of body text (25em).
+  // A single column is capped at about 70 characters (42em) and centred.
+  const MIN_COLUMN_EM = 25, MAX_SINGLE_EM = 42;
   function measure() {
+    vp.style.maxWidth = '';
     const rect = vp.getBoundingClientRect();
-    const narrow = rect.width < 680;
-    C = narrow ? 1 : 2;
-    const fs = (narrow ? 16 : rect.width > 1000 ? 17.5 : 16.5) * scale;
-    G = Math.round(fs * (narrow ? 2.4 : 3.2));
-    W = Math.floor(rect.width);
+    const fs = (rect.width < 680 ? 16 : rect.width > 1000 ? 17.5 : 16.5) * scale;
+    const twoColumnGap = Math.round(fs * 3.2);
+    C = (rect.width - twoColumnGap) / 2 >= fs * MIN_COLUMN_EM ? 2 : 1;
+    G = C === 2 ? twoColumnGap : Math.round(fs * 2.4);
+    W = Math.floor(C === 1 ? Math.min(rect.width, fs * MAX_SINGLE_EM) : rect.width);
     W -= (W - (C - 1) * G) % C;
+    vp.style.maxWidth = W + 'px';
     H = Math.floor(rect.height);
     colW = (W - (C - 1) * G) / C;
     stride = W + G;
@@ -947,7 +952,7 @@ td:first-child { font-family: var(--f-display); font-weight: 600; }
   };
   relayout(initial());
   let rt;
-  new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => relayout(), 120); }).observe(vp);
+  new ResizeObserver(() => { clearTimeout(rt); rt = setTimeout(() => relayout(), 120); }).observe(vp.parentElement);
   if (document.fonts) document.fonts.ready.then(() => relayout());
 })();
 </script>

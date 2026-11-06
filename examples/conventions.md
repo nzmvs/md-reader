@@ -4,7 +4,7 @@
 
 [Structure](#part-1-structure) | [Pages](#part-2-pages) | [Figures](#part-3-figures) | [Cards and code](#part-4-cards-and-code) | [Reading](#part-5-reading) | [Glossary](#glossary)
 
-md-reader turns one long Markdown file into a single HTML page that reads like a book. Each screen shows one page, each page has two columns, and you turn pages sideways instead of scrolling. On a phone the page drops to one column.
+md-reader turns one long Markdown file into a single HTML page that reads like a book. Each screen shows one page, each page has two columns, and you turn pages sideways instead of scrolling. When two columns would be too narrow, as on a phone, the page uses one column.
 
 This document describes the conventions md-reader follows. It is also its own example: build it with `pnpm example` and open `examples/conventions.html` to see every convention at work.
 
@@ -44,6 +44,10 @@ The browser does the pagination. Each section is laid out in CSS columns with a 
 - Code blocks, tables and glossary entries never split across two columns. A code block taller than a column scrolls inside its own box instead.
 - Paragraphs keep at least two lines at the bottom and top of a column.
 
+### One column or two
+
+A page has two columns only while each column holds about 42 characters of text (25 em). Below that, for example on a phone or at a large text size on a laptop, the page uses one column, capped at about 70 characters (42 em) and centred on the sheet.
+
 ### Text size and window size
 
 Changing the text size or resizing the window lays the pages out again. md-reader remembers the first block on the current page and turns back to it afterwards, so you keep your place. The text size and your place are stored in the browser, per document.
@@ -56,7 +60,7 @@ A paragraph that holds nothing but an image becomes a numbered figure. Where the
 
 - **In the front matter**, the figure gets a page of its own right after the cover.
 - **At the start of a section**, directly after the heading or after its first paragraph, the figure shares an opening page with the section title, as in this section.
-- **Anywhere else**, the figure sits in the column at column width.
+- **Anywhere else**, the figure sits in the column at column width. A tall figure shrinks so that it never gets taller than the page.
 
 Every figure has an Enlarge button that opens it full screen.
 
@@ -66,7 +70,7 @@ The caption is the image title, the text in quotes after the file name: `![alt t
 
 ### SVG files are inlined and themed
 
-Local SVG files are copied into the page, so the HTML has no outside files. Every fixed colour in the SVG is replaced by a CSS variable. In dark mode those variables get a matching dark colour with the same hue, and white backgrounds take the colour of the page. PNG, JPEG, GIF, WebP and AVIF files are embedded as they are.
+Local SVG files are copied into the page, like the fonts, so the HTML has no outside files. Every fixed colour in the SVG is replaced by a CSS variable. In dark mode those variables get a matching dark colour with the same hue, and white backgrounds take the colour of the page. PNG, JPEG, GIF, WebP and AVIF files are embedded as they are.
 
 Images from other websites are left as links, and md-reader prints a warning for each. Some hosts block them; claude.ai artifacts are one.
 

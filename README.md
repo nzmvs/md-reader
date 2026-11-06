@@ -1,6 +1,6 @@
 # md-reader
 
-Turns one long Markdown file into a single self-contained HTML page that reads like a book: one page per screen, two columns per page, turned sideways. One column on phones. Light and dark themes follow the system.
+Turns one long Markdown file into a single self-contained HTML page that reads like a book: one page per screen, two columns per page, turned sideways. When a column would get too narrow (a phone, or a large text size), the page uses one centred column. Light and dark themes follow the system.
 
 The reader has a cover with a generated table of contents and page numbers, a Contents drawer, a progress bar with one segment per section, adjustable text size, copy buttons on prompts and code, and full-screen views for figures, wide code and tables. It remembers your place.
 
@@ -22,7 +22,7 @@ node src/cli.js guide.md --fragment              # no <!doctype>/<head>, for cla
 | `--lang <code>` | `en` | Document language, used for hyphenation |
 | `--fragment` | off | Omit the document head for hosts that add their own |
 
-Local images are embedded, so the output has no outside files. Remote images stay as URLs and produce a warning.
+Fonts and local images are embedded, so the output has no outside files and works offline. Remote images stay as URLs and produce a warning. The embedded fonts (Literata, Familjen Grotesk, IBM Plex Mono; Latin subsets, about 350 KB per page) are under the SIL Open Font License; see `src/fonts/`.
 
 ## How Markdown maps to the reader
 

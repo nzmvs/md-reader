@@ -115,6 +115,11 @@ test('fragment output has no document head', () => {
   assert.ok(html.startsWith('<!doctype html>'));
 });
 
+test('fonts are embedded, nothing loads from a font host', () => {
+  assert.equal(html.match(/@font-face \{ font-family: "[^"]+"; [^}]*src: url\(data:font\/woff2;base64,/g).length, 5);
+  assert.doesNotMatch(html, /fonts\.(googleapis|gstatic)\.com/);
+});
+
 test('missing images warn instead of failing', () => {
   const r = build('# T\n\n## A\n\n![x](nope.png)\n', { baseDir: dir });
   assert.deepEqual(r.warnings, ['image not found: nope.png']);
