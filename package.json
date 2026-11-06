@@ -1,0 +1,23 @@
+{
+  "name": "md-reader",
+  "version": "0.1.0",
+  "description": "Turn a long Markdown document into a paginated two-column reader in a single HTML file.",
+  "type": "module",
+  "bin": {
+    "md-reader": "src/cli.js"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "test": "node --test",
+    "example": "node src/cli.js examples/conventions.md"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "packageManager": "pnpm@10.20.0",
+  "dependencies": {
+    "markdown-it": "^15.0.3"
+  }
+}

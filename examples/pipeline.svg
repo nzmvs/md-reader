@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" width="960" height="300" role="img">
+<rect x="0" y="0" width="960" height="300" rx="12" fill="#ffffff"/>
+<rect x="24" y="110" width="170" height="64" rx="8" fill="#f4f6fa" stroke="#4a5568" stroke-width="1.5"/>
+<text x="109" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#1a202c">Markdown file</text>
+<text x="109" y="158" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#4a5568">plus local images</text>
+<rect x="260" y="110" width="170" height="64" rx="8" fill="#f4f6fa" stroke="#4a5568" stroke-width="1.5"/>
+<text x="345" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#1a202c">Token stream</text>
+<text x="345" y="158" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#4a5568">markdown-it</text>
+<rect x="496" y="110" width="170" height="64" rx="8" fill="#e3edfb" stroke="#2b6cb0" stroke-width="1.5"/>
+<text x="581" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#1a202c">Runs</text>
+<text x="581" y="158" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#4a5568">cover, plates, sections</text>
+<rect x="732" y="110" width="200" height="64" rx="8" fill="#e6f4ea" stroke="#2f855a" stroke-width="1.5"/>
+<text x="832" y="138" text-anchor="middle" font-family="system-ui, sans-serif" font-size="15" font-weight="600" fill="#1a202c">Reader HTML</text>
+<text x="832" y="158" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#4a5568">one self-contained file</text>
+<path d="M194,142 H252" fill="none" stroke="#4a5568" stroke-width="1.5"/>
+<polygon points="258,142 249,146.5 249,137.5" fill="#4a5568"/>
+<path d="M430,142 H488" fill="none" stroke="#4a5568" stroke-width="1.5"/>
+<polygon points="494,142 485,146.5 485,137.5" fill="#4a5568"/>
+<path d="M666,142 H724" fill="none" stroke="#4a5568" stroke-width="1.5"/>
+<polygon points="730,142 721,146.5 721,137.5" fill="#4a5568"/>
+<text x="345" y="214" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#4a5568">headings get GitHub-style ids</text>
+<text x="581" y="214" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#4a5568">each run starts on a new page</text>
+<text x="832" y="214" text-anchor="middle" font-family="system-ui, sans-serif" font-size="12" fill="#4a5568">browser paginates the columns</text>
+</svg>
